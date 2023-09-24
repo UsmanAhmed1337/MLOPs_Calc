@@ -8,14 +8,18 @@ on:
     branches: [ "i202440i" ]
   pull_request:
     branches: [ "i202440i" ]
+    types:
+      -closed
 
 permissions:
   contents: read
 
-jobs:
-  build:
+jobs:  
+  if_merged:
+    if: github.event.pull_request.merged=true
+    
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
